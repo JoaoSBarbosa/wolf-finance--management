@@ -1,8 +1,16 @@
 import Image from "next/image";
 import { Button } from "../_components/ui/button";
 import { LogInIcon } from "lucide-react";
+import { SignInButton } from "@clerk/nextjs";
+import { auth } from "@clerk/nextjs/server";
+import { redirect } from "next/navigation";
 
-const Login = () => {
+const Login = async () => {
+  // o auth pega o usuario logado
+  const { userId } = await auth();
+  if (userId) {
+    redirect("/");
+  }
   return (
     <div className="grid h-full grid-cols-2">
       <div className="mx-auto flex h-full max-w-[550px] flex-col justify-center p-8">
@@ -19,10 +27,12 @@ const Login = () => {
           transformar sua gestão de despesas e investimentos. Conecte-se agora e
           comece a tomar decisões mais inteligentes com facilidade!
         </p>
-        <Button variant={"outline"}>
-          <LogInIcon className="mr-2" />
-          Fazer login ou criar conta
-        </Button>
+        <SignInButton>
+          <Button variant={"outline"}>
+            <LogInIcon className="mr-2" />
+            Fazer login ou criar conta
+          </Button>
+        </SignInButton>
       </div>
 
       <div className="relative h-full w-full">
