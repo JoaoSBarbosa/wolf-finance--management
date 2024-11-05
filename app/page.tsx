@@ -1,7 +1,5 @@
-const Home=()=>{
-  return(
-    <h1> Olá, Projeto</h1>
-  )
-}
+const Home = () => {
+  return <div className="flex items-start justify-between"></div>;
+};
 
 export default Home;
